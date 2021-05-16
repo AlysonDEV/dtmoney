@@ -1,5 +1,16 @@
+import axios from "axios"
+import { useEffect } from "react"
 import {Container} from "./styles"
+
 export function TransactionTable () {
+  useEffect(()=>{
+    axios.get('https://localhost:3000/api/transactions')
+      .then(response => console.log(response.data[0].title))
+      .then(data => console.log('teste'))
+    // fetch('http://localhost:3000/api/transactions')
+    //   .then(response => response.json())
+  }, [])
+
   return (
     <Container>
       <table>
