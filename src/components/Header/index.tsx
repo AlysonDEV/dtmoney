@@ -1,17 +1,12 @@
-import Modal from 'react-modal'
 import logoImg from '../../assets/logo.svg'
 
 import { Container, Content } from './styles'
 
-Modal.setAppElement('#root')
-
-interface propsModal{
-  status: boolean;
-  closeModal: () => void;
-  openModal: () => void;
+interface propsModal {
+  openModal: () => void
 }
 
-export function Header ({status, closeModal, openModal}: propsModal) {
+export function Header ({openModal}: propsModal) {
 
   return (
     <Container>
@@ -22,13 +17,6 @@ export function Header ({status, closeModal, openModal}: propsModal) {
         >
           Nova transação
         </button>
-
-        <Modal 
-          isOpen={status}
-          onRequestClose={closeModal}
-        >
-          <h2>Cadastro de Transações</h2>
-        </Modal>
       </Content>
     </Container>
   )

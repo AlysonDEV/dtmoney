@@ -2,12 +2,12 @@
 import { useState } from "react";
 import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
-import { GlobalStyle } from "./styles/global";
-
+import { NewTransactionModal } from './components/NewTransactionModal' 
+import { GlobalStyle } from "./styles/global"
 
 
 export function App() {
-  const [newTransactionModalIsOpen,setNewTransactionModalIsOpen] = useState(false)
+  const [isNewTransactionModalIsOpen,setNewTransactionModalIsOpen] = useState(false)
 
   function handleCloseNewTrasactionModal() {
     setNewTransactionModalIsOpen(false)
@@ -20,11 +20,13 @@ export function App() {
   return (
     <>
     	<Header 
-        status={newTransactionModalIsOpen} 
-        openModal={handleOpenNewTrasactionModal} 
-        closeModal={handleCloseNewTrasactionModal} 
+        openModal={handleOpenNewTrasactionModal}
       />
       <Dashboard/>
+      <NewTransactionModal
+        status={isNewTransactionModalIsOpen}
+        closeModal={handleCloseNewTrasactionModal}
+      />
     	<GlobalStyle/>
     </>
   );
