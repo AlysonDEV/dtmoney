@@ -1,16 +1,11 @@
-import axios from "axios"
-import { useEffect } from "react"
-import {Container} from "./styles"
+import { useContext } from "react"
+import { TransactionsContext } from "../../TransactionsContext"
+
+import { Container } from "./styles"
 
 export function TransactionTable () {
-  useEffect(()=>{
-    axios.get('https://localhost:3000/api/transactions')
-      .then(response => console.log(response.data[0].title))
-      .then(data => console.log('teste'))
-    // fetch('http://localhost:3000/api/transactions')
-    //   .then(response => response.json())
-  }, [])
-
+  const {transactions} = useContext(TransactionsContext)
+  
   return (
     <Container>
       <table>
@@ -23,18 +18,25 @@ export function TransactionTable () {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de Web Site</td>
-            <td className="deposit">R$12.000</td>
-            <td>Desenvolvimento</td>
-            <td>20/02/2021</td>
-          </tr>
-          <tr>
-            <td>Aluguel</td>
-            <td className="withdraw">- R$1.100</td>
-            <td>Casa</td>
-            <td>17/02/2021</td>
-          </tr>
+          {transactions.map(transaction => (
+            <tr key={transaction.id}>
+              <td>{transaction.title}</td>
+              <td 
+                className={transaction.type}>
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                    }).format(transaction.amount)
+                  }
+              </td>
+              <td>{transaction.category}</td>
+              <td>
+                {new Intl.DateTimeFormat('pt-BR').format(
+                  new Date(transaction.createAt)
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>
