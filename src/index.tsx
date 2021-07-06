@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {App} from './App';
+import { App } from './App';
 import { createServer, Model } from 'miragejs';
 
 
-createServer ({
+createServer({
   models: {
     transaction: Model,
   },
@@ -13,7 +13,7 @@ createServer ({
     server.db.loadData({
       transactions: [
         {
-          id:1 , 
+          id: 1,
           title: 'Freelance de website',
           type: 'deposit',
           amount: '30',
@@ -21,7 +21,7 @@ createServer ({
           createAt: new Date('2021-06-06 09:05:00'),
         },
         {
-          id:2 , 
+          id: 2,
           title: 'Parcela da casa',
           type: 'withdraw',
           amount: '420',
@@ -32,7 +32,7 @@ createServer ({
     })
   },
 
-  routes(){
+  routes() {
     this.namespace = "api";
 
     this.get('/transactions', () => {
@@ -40,9 +40,9 @@ createServer ({
     })
 
     this.post('/transactions', (schema, request) => {
-        const data = JSON.parse(request.requestBody)
+      const data = JSON.parse(request.requestBody)
 
-        return schema.create('transaction', data)
+      return schema.create('transaction', data)
     })
   }
 
